@@ -10,7 +10,7 @@ if (!movieId) {
   process.exit(1);
 }
 
-function fetchCharacterName(url, callback) {
+function fetchCharacterName (url, callback) {
   request(url, (error, response, body) => {
     if (error) {
       callback(error, null);
@@ -28,7 +28,7 @@ function fetchCharacterName(url, callback) {
   });
 }
 
-function fetchCharacters(characterList, index = 0) {
+function fetchCharacters (characterList, index = 0) {
   if (index >= characterList.length) {
     return;
   }
