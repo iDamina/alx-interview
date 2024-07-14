@@ -18,7 +18,8 @@ function fetchCharacterName(url, callback) {
     }
 
     if (response.statusCode !== 200) {
-      callback(`Failed to fetch ${url}: ${response.statusMessage}`, null);
+      const errorMsg = `Failed to fetch ${url}: ${response.statusMessage}`;
+      callback(new Error(errorMsg), null);
       return;
     }
 
@@ -34,7 +35,7 @@ function fetchCharacters(characterList, index = 0) {
 
   fetchCharacterName(characterList[index], (error, name) => {
     if (error) {
-      console.error(error);
+      console.error(error.message);
     } else {
       console.log(name);
       fetchCharacters(characterList, index + 1);
@@ -44,12 +45,13 @@ function fetchCharacters(characterList, index = 0) {
 
 request(movieEndpoint, (error, response, body) => {
   if (error) {
-    console.error(`Error fetching movie data: ${error}`);
+    console.error(`Error fetching movie data: ${error.message}`);
     return;
   }
 
   if (response.statusCode !== 200) {
-    console.error(`Failed to fetch movie data: ${response.statusMessage}`);
+    const errorMsg = `Failed to fetch movie data: ${response.statusMessage}`;
+    console.error(new Error(errorMsg).message);
     return;
   }
 
