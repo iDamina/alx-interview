@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """Island Perimeter - ALX Interview"""
 
-def check_val(x):
+def check_val(perimeter):
         """
         checking for a value
         """
-        if (x==0):
+        if perimeter == 0:
             return 1
         return 0
 
@@ -15,7 +15,7 @@ def island_perimeter(grid):
     
     row = len(grid)
     col = len(grid[0])
-    assert (1 <= row and col <= 100), "length must be between 1 an 100"
+    assert 1 <= row <= 100 and 1 <= col <= 100, "length must be between 1 an 100"
 
     # initialize the perimeter counter
     perimeter = 0
@@ -26,21 +26,21 @@ def island_perimeter(grid):
                                         "grid numbers must be 0 or 1"
             # check if the cell is land
             if grid[i][j] == 1:
-                if i-1 < 0:
+                if i - 1 < 0:
                     perimeter += 1
                 else:
-                    perimeter += check_val(grid[i-1][j])
-                if j-1 < 0:
+                    perimeter += check_val(grid[i - 1][j])
+                if j - 1 < 0:
                     perimeter += 1
                 else:
-                    perimeter += check_val(grid[i][j-1])
+                    perimeter += check_val(grid[i][j - 1])
 
                 try:
-                    perimeter += check_val(grid[i+1][j])
+                    perimeter += check_val(grid[i + 1][j])
                 except IndexError:
                     perimeter += 1
                 try:
-                    perimeter += check_val(grid[i][j+1])
+                    perimeter += check_val(grid[i][j + 1])
                 except IndexError:
                     perimeter += 1
 
